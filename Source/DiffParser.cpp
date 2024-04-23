@@ -6,8 +6,8 @@
 std::string DiffParser(std::vector<Token>& arguments)
 {
 
-	std::string diff; //Производная
-	std::map<std::string, std::string> DiffsList; //Список уже вычисленных функций и их производных
+	std::string diff; //ГЏГ°Г®ГЁГ§ГўГ®Г¤Г­Г Гї
+	std::map<std::string, std::string> DiffsList; //Г‘ГЇГЁГ±Г®ГЄ ГіГ¦ГҐ ГўГ»Г·ГЁГ±Г«ГҐГ­Г­Г»Гµ ГґГіГ­ГЄГ¶ГЁГ© ГЁ ГЁГµ ГЇГ°Г®ГЁГ§ГўГ®Г¤Г­Г»Гµ
 	std::vector<std::string> operations = { "(", "+", "-", "*", "/", "^", ")", "(", "()","sin", "cos",  "tan", "ctg" };
 
 	try {
@@ -32,7 +32,7 @@ std::string DiffParser(std::vector<Token>& arguments)
 
 			std::string f1 = "", f2 = "", df1 = "", df2 = "", oper = "", expression = "";
 
-			if (arguments[firstOperIndex].getType() == Token::FUNCTION) //Обработка функций
+			if (arguments[firstOperIndex].getType() == Token::FUNCTION) //ГЋГЎГ°Г ГЎГ®ГІГЄГ  ГґГіГ­ГЄГ¶ГЁГ©
 			{
 				int ComposeIndex = firstOperIndex;
 
@@ -47,7 +47,7 @@ std::string DiffParser(std::vector<Token>& arguments)
 				arguments[ComposeIndex].setStr(expression);
 				arguments.erase(arguments.begin() + ComposeIndex - 1);
 			}
-			else //Обработка бинарных операций
+			else //ГЋГЎГ°Г ГЎГ®ГІГЄГ  ГЎГЁГ­Г Г°Г­Г»Гµ Г®ГЇГҐГ°Г Г¶ГЁГ©
 			{
 				f1 = arguments[firstOperIndex - 2].getStr();
 				df1 = Differentiation::Diff(f1, DiffsList);
@@ -60,7 +60,7 @@ std::string DiffParser(std::vector<Token>& arguments)
 				arguments.erase(arguments.begin() + firstOperIndex);
 				arguments.erase(arguments.begin() + firstOperIndex - 1);
 				arguments[firstOperIndex - 2].setStr(expression);
-			} // НЕОБХОДИМО ДОБАВИТЬ ОБРАБОТЧИК УНАРНЫХ ОПЕРАЦИЙ!!!
+			} // ГЌГ…ГЋГЃГ•ГЋГ„Г€ГЊГЋ Г„ГЋГЃГЂГ‚Г€Г’Гњ ГЋГЃГђГЂГЃГЋГ’Г—Г€ГЉ Г“ГЌГЂГђГЌГ›Г• ГЋГЏГ…ГђГЂГ–Г€Г‰!!!
 
 			if (!DiffsList.contains(expression))
 			{
